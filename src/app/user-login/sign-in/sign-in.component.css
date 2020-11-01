@@ -1,0 +1,12 @@
+.login{
+  margin-top: 10%;
+  }
+
+img{
+  object-fit: cover;
+  width: 80%;
+  margin-bottom: 10%;
+}
+mat-card{
+  max-width: 30%;
+}
