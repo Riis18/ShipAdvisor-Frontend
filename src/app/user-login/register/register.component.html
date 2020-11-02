@@ -1,1 +1,47 @@
-<p>register works!</p>
+<div fxLayout="row" fxLayoutAlign="center" class="login">
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Registrere ny bruger</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+      <form [formGroup]="registerForm" fxLayout="column">
+        <mat-form-field appearance="standard">
+          <mat-label>Fornavn</mat-label>
+          <input matInput placeholder="Fornavn" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Efternavn</mat-label>
+          <input matInput placeholder="Efternavn" formControlName="lastName">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Adresse</mat-label>
+          <input matInput placeholder="Adresse" formControlName="address">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Enter password</mat-label>
+          <input id="password" matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Enter password</mat-label>
+          <input id="password2" matInput [type]="hide ? 'password' : 'text'" formControlName="password2">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center">
+      <button mat-raised-button color="primary" (click)="onSubmit()">Registrere bruger</button>
+    </mat-card-actions>
+    <mat-card-actions fxLayoutAlign="center">
+      <a routerLink="">Tilbage til login side</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
