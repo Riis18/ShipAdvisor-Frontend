@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import {Customer} from './shared/models/customer';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,7 @@ import {Customer} from './shared/models/customer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ShipAdvisorFrontend';
+  constructor() {
+    firebase.initializeApp(environment.firebaseConfig);
+  }
 }

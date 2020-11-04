@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {LoginService} from '../../shared/services/login.service';
+import {Router} from '@angular/router';
+import firebase from 'firebase/app';
+import 'firebase/auth'
+import {Customer} from '../../shared/models/customer';
 
 @Component({
   selector: 'app-register',
@@ -36,18 +41,24 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(private loginService: LoginService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
-    console.log(this.registerForm.get('firstName').value);
-    console.log(this.registerForm.get('lastName').value);
-    console.log(this.registerForm.get('email').value);
-    console.log(this.registerForm.get('address').value);
-    console.log(this.registerForm.get('password').value);
-    console.log(this.registerForm.get('password2').value);
+  async onSubmit() {
+    let customer = new Customer();
+    customer = this.registerForm.value;
+    await firebase.auth().createUserWithEmailAndPassword(customer.email, customer.password).catch(error => {
+
+    });
+    await firebase.auth().onAuthStateChanged(result => {
+      customer.uId = result.uid;
+      this.loginService.createCustomer(customer).subscribe(() => {
+        this.router.navigateByUrl('/customers-list');
+      });
+    });
   }
 
 }
