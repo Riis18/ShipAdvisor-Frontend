@@ -11,13 +11,17 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './material-module';
+import { NavBarComponent } from './nav-bar/nav-bar/nav-bar.component';
+import { DashboardCustomerComponent } from './dashboard/dashboard-customer/dashboard-customer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersListComponent,
     RegisterComponent,
-    SignInComponent
+    SignInComponent,
+    NavBarComponent,
+    DashboardCustomerComponent
   ],
   imports: [
     BrowserModule,

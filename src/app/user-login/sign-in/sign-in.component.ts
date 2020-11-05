@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../shared/services/login.service';
 import {Router} from '@angular/router';
+import firebase from 'firebase';
+import {CustomerService} from '../../shared/services/customer.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,14 +19,13 @@ export class SignInComponent implements OnInit {
 
   hide = true;
 
-  constructor(private loginService: LoginService,
-              private router: Router) { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
-    this.loginService.signIn(this.loginForm.get('email').value, this.loginForm.get('password').value);
+  async onSubmit() {
+    await this.loginService.signIn(this.loginForm.get('email').value, this.loginForm.get('password').value);
   }
 
 }

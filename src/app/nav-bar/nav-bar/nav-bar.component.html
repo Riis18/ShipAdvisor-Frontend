@@ -1,0 +1,24 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="sidenav"
+               fixedInViewport="false"
+               mode="side"
+               opened>
+    <mat-list-item>
+      <img
+        fxLayoutAlign="center"
+        class="imgLogo"
+        src="https://static.wixstatic.com/media/533184_36c1e0722ebc46cfbe8229ef781ec4e0~mv2_d_15341_3554_s_3.png/v1/fill/w_937,h_217,al_c,q_85,usm_2.00_1.00_0.00/okaltaaa111(1).webp"
+        alt="ShipAdvisorLogo"
+        routerLink="/">
+    </mat-list-item>
+    <mat-nav-list>
+      <hr>
+      <a mat-list-item routerLink="/dashboard" class="navBtn">Dashboard</a>
+      <a mat-list-item routerLink="/customer" class="navBtn">tester</a>
+      <a mat-list-item class="navBtn" fxLayoutAlign="" (click)="signOut()" >Log ud</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -15,19 +15,25 @@ export class CustomerService {
 
   public user = new BehaviorSubject<Customer>(null);
   authLoaded = false;
+  is
 
 
   getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(environment.apiUrl + 'customer');
   }
 
-
+  createCustomer(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(environment.apiUrl + 'login/addcustomer', customer);
+  }
 
   async fetchUser() {
     const firebaseId = await this.getUserFromFB() as { uid: string; };
 
     const customer = new Customer();
-    customer.uId = firebaseId.uid;
+    if (firebaseId === null || firebaseId === undefined) {
+      this.user.next(null);
+      return;
+    }
     this.user.next(customer);
   }
 

@@ -6,6 +6,7 @@ import 'firebase/auth';
 import {Customer} from '../models/customer';
 import {environment} from '../../../environments/environment';
 import {CustomerService} from './customer.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,39 @@ import {CustomerService} from './customer.service';
 export class LoginService {
 
   constructor(private http: HttpClient,
-              private customerService: CustomerService) { }
+              private customerService: CustomerService,
+              private router: Router) { }
 
 
-  createCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(environment.apiUrl + 'login/addcustomer', customer);
-  }
-
-  signIn(email: string, password: string): any {
-    firebase.auth().signInWithEmailAndPassword(email, password).then( data => {
-      console.log('User signed in', email, data);
+  async signIn(email: string, password: string){
+    await firebase.auth().signInWithEmailAndPassword(email, password).then(async data => {
+      await this.customerService.fetchUser().then(() => {
+        this.router.navigateByUrl('/dashboard');
+      });
     }).catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode + errorMessage);
+    });
+  }
+
+  async createUserFB(customer: Customer) {
+    await firebase.auth().createUserWithEmailAndPassword(customer.email, customer.password).catch(error => {
+
+    });
+    await this.customerService.fetchUser().then(() => {
+      customer.uId = this.customerService.user.getValue().uId;
+      this.customerService.createCustomer(customer).subscribe(() => {
+        this.router.navigateByUrl('/dashboard');
+      });
+    });
+  }
+
+  signOut() {
+    firebase.auth().signOut().then(u => {
+      this.router.navigateByUrl('/login');
+    }).catch(error => {
+
     });
   }
 }
