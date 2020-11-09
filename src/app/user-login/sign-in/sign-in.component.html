@@ -1,0 +1,30 @@
+<div fxLayout="row" fxLayoutAlign="center" class="login">
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center">
+      <img
+        src="https://static.wixstatic.com/media/533184_36c1e0722ebc46cfbe8229ef781ec4e0~mv2_d_15341_3554_s_3.png/v1/fill/w_937,h_217,al_c,q_85,usm_2.00_1.00_0.00/okaltaaa111(1).webp"
+      />
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+      <form [formGroup]="loginForm" fxLayout="column">
+        <mat-form-field appearance="standard">
+          <mat-label>Enter Email</mat-label>
+          <input matInput placeholder="Enter email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Enter password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center">
+      <button mat-raised-button color="primary" (click)="onSubmit()">Log ind</button>
+    </mat-card-actions>
+    <mat-card-actions fxLayoutAlign="center">
+      <a routerLink="/register">Opret bruger</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
