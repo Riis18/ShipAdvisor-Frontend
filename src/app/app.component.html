@@ -1,10 +1,13 @@
+<router-outlet *ngIf="!userLoggedIn"></router-outlet>
+<app-nav-bar *ngIf="userLoggedIn">
+  <div fxFlexFill fxLayout="column">
+    <div fxLayout="=column" fxFlex>
+      <div fxFlex>
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-nav-bar>
 
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="250"
-    alt="ShipAdvisor Logo"
-    src="https://static.wixstatic.com/media/533184_36c1e0722ebc46cfbe8229ef781ec4e0~mv2_d_15341_3554_s_3.png/v1/fill/w_937,h_217,al_c,q_85,usm_2.00_1.00_0.00/okaltaaa111(1).webp"
-  />
-  <app-customers-list></app-customers-list>
-</div>
