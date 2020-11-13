@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from '../../shared/services/login.service';
+import {UserService} from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +8,7 @@ import {LoginService} from '../../shared/services/login.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: UserService) { }
 
   ngOnInit(): void {
   }

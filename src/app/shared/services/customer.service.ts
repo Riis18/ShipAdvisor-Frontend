@@ -13,8 +13,6 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
-  public user = new BehaviorSubject<Customer>(null);
-
 
   getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(environment.apiUrl + 'customer');
@@ -22,25 +20,6 @@ export class CustomerService {
 
   createCustomer(customer: Customer, password: string): Observable<Customer> {
     return this.http.post<Customer>(environment.apiUrl + 'login/createCustomer', {customer, password});
-  }
-
-  async fetchUser() {
-    const firebaseId = await this.getUserFromFB() as { uid: string; };
-
-    const customer = new Customer();
-    if (firebaseId === null || firebaseId === undefined) {
-      this.user.next(null);
-      return;
-    }
-    this.user.next(customer);
-  }
-
-  getUserFromFB() {
-    return new Promise( resolve => {
-      firebase.auth().onAuthStateChanged( user => {
-        resolve(user);
-      });
-    });
   }
 
 }

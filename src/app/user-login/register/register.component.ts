@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from '../../shared/services/login.service';
+import {UserService} from '../../shared/services/user.service';
 import {Customer} from '../../shared/models/customer';
 
 @Component({
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: UserService) { }
 
   ngOnInit(): void {
   }

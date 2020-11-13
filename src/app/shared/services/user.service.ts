@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import {Customer} from '../models/customer';
@@ -11,16 +11,18 @@ import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class UserService {
 
   constructor(private http: HttpClient,
               private customerService: CustomerService,
               private router: Router) { }
 
+  public user = new BehaviorSubject<Customer>(null);
+
 
   async signIn(email: string, password: string){
     await firebase.auth().signInWithEmailAndPassword(email, password).then(async data => {
-      await this.customerService.fetchUser().then(() => {
+      await this.fetchUser().then(() => {
         this.router.navigateByUrl('/dashboard');
       });
     }).catch(error => {
@@ -41,6 +43,25 @@ export class LoginService {
       this.router.navigateByUrl('/login');
     }).catch(error => {
 
+    });
+  }
+
+  async fetchUser() {
+    const firebaseId = await this.getUserFromFB() as { uid: string; };
+
+    const customer = new Customer();
+    if (firebaseId === null || firebaseId === undefined) {
+      this.user.next(null);
+      return;
+    }
+    this.user.next(customer);
+  }
+
+  getUserFromFB() {
+    return new Promise( resolve => {
+      firebase.auth().onAuthStateChanged( user => {
+        resolve(user);
+      });
     });
   }
 }
