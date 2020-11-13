@@ -31,14 +31,8 @@ export class LoginService {
   }
 
   async createUserFB(customer: Customer) {
-    await firebase.auth().createUserWithEmailAndPassword(customer.email, customer.password).catch(error => {
-
-    });
-    await this.customerService.fetchUser().then(() => {
-      customer.uId = this.customerService.user.getValue().uId;
-      this.customerService.createCustomer(customer).subscribe(() => {
-        this.router.navigateByUrl('/dashboard');
-      });
+    await this.customerService.createCustomer(customer, customer.password).subscribe(() => {
+      this.signIn(customer.email, customer.password);
     });
   }
 

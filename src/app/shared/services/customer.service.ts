@@ -14,16 +14,14 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   public user = new BehaviorSubject<Customer>(null);
-  authLoaded = false;
-  is
 
 
   getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(environment.apiUrl + 'customer');
   }
 
-  createCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(environment.apiUrl + 'login/addcustomer', customer);
+  createCustomer(customer: Customer, password: string): Observable<Customer> {
+    return this.http.post<Customer>(environment.apiUrl + 'login/createCustomer', {customer, password});
   }
 
   async fetchUser() {

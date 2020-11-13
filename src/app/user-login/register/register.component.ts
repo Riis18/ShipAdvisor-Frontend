@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../shared/services/login.service';
+import {Customer} from '../../shared/models/customer';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,10 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', Validators.email),
     phoneNumber: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
+    address2: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    zipCode: new FormControl(+'', Validators.required),
+    country: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.minLength(8), Validators.required]),
     password2: new FormControl('', [Validators.minLength(8), Validators.required])
   });
@@ -43,9 +48,9 @@ export class RegisterComponent implements OnInit {
   }
 
   async onSubmit() {
-    let customer;
-    customer = this.registerForm.value;
-    await this.loginService.createUserFB(customer);
+    let cust: Customer;
+    cust = this.registerForm.value;
+    await this.loginService.createUserFB(cust);
   }
 
 }
