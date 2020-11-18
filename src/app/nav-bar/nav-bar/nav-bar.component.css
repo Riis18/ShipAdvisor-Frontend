@@ -9,6 +9,28 @@
   border: transparent;
 }
 
+.mat-toolbar {
+  height: 52px;
+  background: #004C99;
+}
+
+.welcome {
+  color: #ffffffcf;
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+  background-color: transparent;
+  border: transparent;
+  margin-right: 50px;
+}
+
+.sidenav-content {
+  margin-top: 100px;
+}
+
+.spacer {
+  flex: 1 auto;
+}
+
 img{
   object-fit: cover;
   width: 80%;

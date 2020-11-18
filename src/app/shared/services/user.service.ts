@@ -19,17 +19,22 @@ export class UserService {
 
   public user = new BehaviorSubject<Customer>(null);
 
-
   async signIn(email: string, password: string){
     await firebase.auth().signInWithEmailAndPassword(email, password).then(async data => {
-      await this.fetchUser().then(() => {
-        this.router.navigateByUrl('/dashboard');
-      });
+      await this.customerService.getCustomerByUid(data.user.uid).subscribe( user => {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.router.navigateByUrl('/dashboard');
+        });
     }).catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode + errorMessage);
     });
+  }
+
+  getCurrentUser(): Customer {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user;
   }
 
   async createUserFB(customer: Customer) {
@@ -41,27 +46,9 @@ export class UserService {
   signOut() {
     firebase.auth().signOut().then(u => {
       this.router.navigateByUrl('/login');
+      localStorage.clear();
     }).catch(error => {
 
-    });
-  }
-
-  async fetchUser() {
-    const firebaseId = await this.getUserFromFB() as { uid: string; };
-
-    const customer = new Customer();
-    if (firebaseId === null || firebaseId === undefined) {
-      this.user.next(null);
-      return;
-    }
-    this.user.next(customer);
-  }
-
-  getUserFromFB() {
-    return new Promise( resolve => {
-      firebase.auth().onAuthStateChanged( user => {
-        resolve(user);
-      });
     });
   }
 }

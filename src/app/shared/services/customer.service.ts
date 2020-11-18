@@ -18,6 +18,10 @@ export class CustomerService {
     return this.http.get<Customer[]>(environment.apiUrl + 'customer');
   }
 
+  getCustomerByUid(uid: string): Observable<Customer> {
+    return this.http.get<Customer>(environment.apiUrl + 'login/' + uid);
+  }
+
   createCustomer(customer: Customer, password: string): Observable<Customer> {
     return this.http.post<Customer>(environment.apiUrl + 'login/createCustomer', {customer, password});
   }

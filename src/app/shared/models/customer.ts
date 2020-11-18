@@ -1,6 +1,8 @@
 export class Customer {
   id: number;
   uId: string;
+  role: string;
+  companyName: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -10,5 +12,6 @@ export class Customer {
   city: string;
   zipCode: number;
   country: string;
+  cvrNumber: string;
   password: string;
 }
