@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from '../../shared/services/login.service';
+import {UserService} from '../../shared/services/user.service';
+import {CustomerService} from '../../shared/services/customer.service';
+import {Customer} from '../../shared/models/customer';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +10,14 @@ import {LoginService} from '../../shared/services/login.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  customer: Customer;
+
+  constructor(private loginService: UserService,
+              private customerService: CustomerService,
+              private userService: UserService) {
+
+    this.customer = this.userService.getCurrentUser();
+  }
 
   ngOnInit(): void {
   }

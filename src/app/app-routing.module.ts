@@ -9,6 +9,7 @@ import {AuthloggedInGuard} from './shared/guards/authlogged-in.guard';
 import {NavBarComponent} from './nav-bar/nav-bar/nav-bar.component';
 
 const routes: Routes = [
+  { path: '', component: SignInComponent},
   { path: 'dashboard', component: DashboardCustomerComponent, pathMatch: 'full', canActivate: [AuthloggedInGuard] },
   { path: 'customer', component: CustomersListComponent, canActivate: [AuthloggedInGuard] },
   { path: 'register', component: RegisterComponent },
