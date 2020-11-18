@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import {Customer} from '../models/customer';
@@ -11,18 +11,20 @@ import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class UserService {
 
   constructor(private http: HttpClient,
               private customerService: CustomerService,
               private router: Router) { }
 
+  public user = new BehaviorSubject<Customer>(null);
 
   async signIn(email: string, password: string){
     await firebase.auth().signInWithEmailAndPassword(email, password).then(async data => {
-      await this.customerService.fetchUser().then(() => {
-        this.router.navigateByUrl('/dashboard');
-      });
+      await this.customerService.getCustomerByUid(data.user.uid).subscribe( user => {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.router.navigateByUrl('/dashboard');
+        });
     }).catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -30,21 +32,21 @@ export class LoginService {
     });
   }
 
-  async createUserFB(customer: Customer) {
-    await firebase.auth().createUserWithEmailAndPassword(customer.email, customer.password).catch(error => {
+  getCurrentUser(): Customer {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user;
+  }
 
-    });
-    await this.customerService.fetchUser().then(() => {
-      customer.uId = this.customerService.user.getValue().uId;
-      this.customerService.createCustomer(customer).subscribe(() => {
-        this.router.navigateByUrl('/dashboard');
-      });
+  async createUserFB(customer: Customer) {
+    await this.customerService.createCustomer(customer, customer.password).subscribe(() => {
+      this.signIn(customer.email, customer.password);
     });
   }
 
   signOut() {
     firebase.auth().signOut().then(u => {
       this.router.navigateByUrl('/login');
+      localStorage.clear();
     }).catch(error => {
 
     });
