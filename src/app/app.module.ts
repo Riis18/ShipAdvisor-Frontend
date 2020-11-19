@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './material-module';
 import { NavBarComponent } from './nav-bar/nav-bar/nav-bar.component';
 import { DashboardCustomerComponent } from './dashboard/dashboard-customer/dashboard-customer.component';
+import { CustomerShipmentComponent } from './customers/customer-shipment/customer-shipment.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DashboardCustomerComponent } from './dashboard/dashboard-customer/dashb
     RegisterComponent,
     SignInComponent,
     NavBarComponent,
-    DashboardCustomerComponent
+    DashboardCustomerComponent,
+    CustomerShipmentComponent
   ],
   imports: [
     BrowserModule,

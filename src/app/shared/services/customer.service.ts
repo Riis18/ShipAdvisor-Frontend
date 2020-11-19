@@ -5,6 +5,7 @@ import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import {Shipment} from '../models/shipment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class CustomerService {
 
   createCustomer(customer: Customer, password: string): Observable<Customer> {
     return this.http.post<Customer>(environment.apiUrl + 'login/createCustomer', {customer, password});
+  }
+
+  getCustomerShipments(uid: string): Observable<Shipment[]> {
+    return this.http.get<Shipment[]>(environment.apiUrl + 'shipment/' + uid);
   }
 
 }
