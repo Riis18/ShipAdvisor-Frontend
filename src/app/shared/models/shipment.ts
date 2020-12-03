@@ -5,9 +5,9 @@ export class Shipment {
   id: number;
   biddingStatus: string;
   orderStatus: string;
-  orderCreated: Date;
-  customer: Customer[];
-  packageList: PackageList[];
+  orderCreated: string;
+  customers: Customer[];
+  packageLists: PackageList[];
   shipmentType: string;
   shipmentSize: string;
   quantity: number;
@@ -16,11 +16,11 @@ export class Shipment {
   pickUpCountry: string;
   pickUpCity: string;
   pickUpZipCode: number;
-  pickUpTime: Date;
+  pickUpTime: string;
   deliveryAddress: string;
   deliveryAddress2: string;
   deliveryCountry: string;
   deliveryCity: string;
   deliveryZipCode: number;
-  deliveryTime: Date;
+  deliveryTime: string;
 }

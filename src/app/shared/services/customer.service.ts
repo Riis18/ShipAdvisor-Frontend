@@ -31,6 +31,10 @@ export class CustomerService {
     return this.http.get<Shipment[]>(environment.apiUrl + 'shipment/' + uid);
   }
 
+  createOrder(shipment: Shipment): Observable<Shipment> {
+    return this.http.post<Shipment>(environment.apiUrl + 'shipment/createShipment', shipment);
+  }
+
 }
 
 

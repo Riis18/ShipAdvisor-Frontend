@@ -110,72 +110,28 @@
           <h3 class="shipment-info">Genstand</h3>
           <h3>Antal</h3>
         </div>
-        <div formArrayName="packageList">
-          <mat-form-field appearance="standard" class="shipment-info">
-            <mat-label>Post nummer</mat-label>
-            <input matInput placeholder="Post nummer" formControlName="pickUpZipCode" required>
-            <mat-label *ngIf="pickUpZipCode.touched && pickUpZipCode.invalid"> skal udfyldes</mat-label>
-          </mat-form-field>
-          <mat-form-field appearance="standard">
-            <mat-label>Post nummer</mat-label>
-            <input matInput placeholder="Post nummer" formControlName="deliveryZipCode" required>
-            <mat-label *ngIf="deliveryZipCode.touched && deliveryZipCode.invalid"> skal udfyldes</mat-label>
-          </mat-form-field>
+        <div formArrayName="packageLists">
+          <div *ngFor="let item of packageList.controls; let i=index" [formGroupName]="i" fxLayout="row">
+            <mat-form-field appearance="standard" class="shipment-info">
+              <mat-label>Genstand</mat-label>
+              <input matInput placeholder="F.eks. Stole" formControlName="item">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Antal</mat-label>
+              <input matInput placeholder="F.eks. 6" formControlName="quantity">
+            </mat-form-field>
+            <mat-card-actions style="margin-left: 20px">
+              <button id="deletePackage" mat-raised-button color="primary" (click)="deletePackageItem(i)">Slet</button>
+            </mat-card-actions>
+          </div>
+          <mat-card-actions>
+            <button id="addPackage" mat-raised-button color="primary" (click)="addPackageItem()">Ny linje</button>
+          </mat-card-actions>
         </div>
+        <mat-card-actions fxLayoutAlign="center">
+          <button id="createShipment" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="checkValidate()">Opret forsendelse</button>
+        </mat-card-actions>
       </form>
     </mat-card-content>
-    <!---------
-    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-      <form [formGroup]="createContainerForm" fxLayout="column">
-        <mat-form-field appearance="standard">
-          <mat-label>Fornavn</mat-label>
-          <input id="firstName" matInput placeholder="Fornavn" formControlName="firstName" required>
-        </mat-form-field>
-        <mat-label *ngIf="firstName.touched && firstName.invalid">Navn skal udfyldes</mat-label>
-        <mat-form-field appearance="standard">
-          <mat-label>Efternavn</mat-label>
-          <input matInput placeholder="Efternavn" formControlName="lastName" required>
-        </mat-form-field>
-        <mat-label *ngIf="lastName.touched && lastName.invalid">Efternavn skal udfyldes</mat-label>
-        <mat-form-field appearance="standard">
-          <mat-label>Adresse</mat-label>
-          <input matInput placeholder="Adresse" formControlName="address" required>
-        </mat-form-field>
-        <mat-label *ngIf="address.touched && address.invalid">Adresse skal udfyldes</mat-label>
-        <mat-form-field appearance="standard">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Email" formControlName="email" required>
-        </mat-form-field>S
-        <mat-label *ngIf="email.touched && email.invalid">Ugyldig email</mat-label>
-        <mat-form-field appearance="standard">
-          <mat-label>Telefon nummer</mat-label>
-          <input matInput placeholder="Telefon nummer" formControlName="phoneNumber" required>
-        </mat-form-field>
-        <mat-label *ngIf="phoneNumber.touched && phoneNumber.invalid">Ugyldig telefon nummmer</mat-label>
-        <mat-form-field appearance="standard">
-          <mat-label>Enter password</mat-label>
-          <input id="password" matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-          <mat-label>Enter password</mat-label>
-          <input id="password2" matInput [type]="hide ? 'password' : 'text'" formControlName="password2" required>
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-        <mat-label *ngIf="password.touched && password.invalid ">*Minimum 8 karakter</mat-label>
-        <mat-label *ngIf="password.value !== password2.value">*Password skal matche</mat-label>
-      </form>
-    </mat-card-content>
-    <mat-card-actions fxLayoutAlign="center">
-      <button id="registerButton" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="checkValidate()">Registrere bruger</button>
-    </mat-card-actions>
-    <mat-card-actions fxLayoutAlign="center">
-      <a routerLink="/login">Tilbage til login side</a>
-    </mat-card-actions>
-    --------->
   </mat-card>
 </div>

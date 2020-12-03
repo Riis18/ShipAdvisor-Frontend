@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Customer} from '../../../shared/models/customer';
+import {Shipment} from '../../../shared/models/shipment';
+import {CustomerService} from '../../../shared/services/customer.service';
+import {UserService} from '../../../shared/services/user.service';
 
 class Types {
   value: string;
@@ -20,20 +24,20 @@ export class ContainerShipmentComponent implements OnInit {
   createContainerForm = this.fb.group({
     shipmentType: new FormControl('Container'),
     shipmentSize: new FormControl('', Validators.required),
-    quantity: new FormControl('', Validators.required),
+    quantity: new FormControl(+'', Validators.required),
     pickUpAddress: new FormControl('', Validators.required),
     pickUpAddress2: new FormControl(''),
     pickUpCity: new FormControl('', Validators.required),
     pickUpCountry: new FormControl('', Validators.required),
-    pickUpZipCode: new FormControl('', Validators.required),
+    pickUpZipCode: new FormControl(+'', Validators.required),
     pickUpTime: new FormControl('', Validators.required),
     deliveryAddress: new FormControl('', Validators.required),
     deliveryAddress2: new FormControl(''),
     deliveryCity: new FormControl('', Validators.required),
     deliveryCountry: new FormControl('', Validators.required),
-    deliveryZipCode: new FormControl('', Validators.required),
+    deliveryZipCode: new FormControl(+'', Validators.required),
     deliveryTime: new FormControl('', Validators.required),
-    packageList: this.fb.array([this.fb.group({item: '', quantity: ''})])
+    packageLists: this.fb.array([this.fb.group({item: '', quantity: +''})])
   });
   get shipmentType(): any { return this.createContainerForm.get('shipmentType'); }
   get shipmentSize(): any { return this.createContainerForm.get('shipmentSize'); }
@@ -50,11 +54,45 @@ export class ContainerShipmentComponent implements OnInit {
   get deliveryCountry(): any { return this.createContainerForm.get('deliveryCountry'); }
   get deliveryZipCode(): any { return this.createContainerForm.get('deliveryZipCode'); }
   get deliveryTime(): any { return this.createContainerForm.get('deliveryTime'); }
-  get packageList(): any { return this.createContainerForm.get('packageList') as FormArray; }
+  get packageList(): any { return this.createContainerForm.get('packageLists') as FormArray; }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private customerService: CustomerService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
+  }
+
+  addPackageItem() {
+    this.packageList.push(this.fb.group({item: '', quantity: +''}));
+  }
+
+  deletePackageItem(index) {
+    this.packageList.removeAt(index);
+  }
+
+  checkValidate(): boolean {
+    if (!this.createContainerForm.invalid) {
+      return false;
+    }
+    return true;
+  }
+
+  onSubmit() {
+    let order: Shipment;
+    let customer: Customer;
+    let date: Date;
+    order = this.createContainerForm.value;
+    date = this.pickUpTime.value;
+    order.pickUpTime = date.toJSON();
+    date = this.deliveryTime.value;
+    order.deliveryTime = date.toJSON();
+    customer = this.userService.getCurrentUser();
+    order.customers = [];
+    order.customers.push(customer);
+    console.log(order);
+    this.customerService.createOrder(order).subscribe();
+    this.createContainerForm.reset();
   }
 
 }

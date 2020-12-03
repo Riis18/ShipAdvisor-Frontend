@@ -4,6 +4,7 @@ import {CustomerService} from '../../shared/services/customer.service';
 import {Customer} from '../../shared/models/customer';
 import {UserService} from '../../shared/services/user.service';
 import {MatTableDataSource} from '@angular/material/table';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-customer-shipment',
@@ -28,8 +29,12 @@ export class CustomerShipmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.customerService.getCustomerShipments(this.customer.uId).subscribe( shipments => {
+      shipments.forEach( s => {
+        s.orderCreated = formatDate(s.orderCreated, 'dd/MM/yyyy', 'en-US');
+        s.pickUpTime = formatDate(s.pickUpTime, 'dd/MM/yyyy', 'en-US');
+        s.deliveryTime = formatDate(s.deliveryTime, 'dd/MM/yyyy', 'en-US');
+      });
       this.shipment = shipments;
-      console.log(this.shipment);
       this.dataSource = new MatTableDataSource(this.shipment);
     });
   }
