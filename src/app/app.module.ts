@@ -14,6 +14,8 @@ import {MaterialModule} from './material-module';
 import { NavBarComponent } from './nav-bar/nav-bar/nav-bar.component';
 import { DashboardCustomerComponent } from './dashboard/dashboard-customer/dashboard-customer.component';
 import { CustomerShipmentComponent } from './customers/customer-shipment/customer-shipment.component';
+import { CustomerShipmenttypeComponent } from './customers/customer-shipmenttype/customer-shipmenttype.component';
+import { ContainerShipmentComponent } from './customers/create-shipments/container-shipment/container-shipment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CustomerShipmentComponent } from './customers/customer-shipment/custome
     SignInComponent,
     NavBarComponent,
     DashboardCustomerComponent,
-    CustomerShipmentComponent
+    CustomerShipmentComponent,
+    CustomerShipmenttypeComponent,
+    ContainerShipmentComponent
   ],
   imports: [
     BrowserModule,
