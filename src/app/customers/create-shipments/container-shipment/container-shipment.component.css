@@ -1,0 +1,26 @@
+
+.input {
+  margin-top: 5%;
+}
+
+.create {
+  margin-top: 5%;
+}
+
+.shipment-info{
+  margin-right: 200px;
+}
+
+.pickup-container{
+  display: flex;
+  align-items: flex-start;
+}
+
+.delivery-container{
+  display: flex;
+  align-items: flex-end;
+}
+
+.set-width {
+  width: 600px;
+}

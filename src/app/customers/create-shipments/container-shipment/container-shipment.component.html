@@ -1,0 +1,137 @@
+<div fxLayout="row" fxLayoutAlign="center" class="create">
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Opret ny container forsendelse</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayoutAlign="column" fxLayoutAlign="center center">
+      <form [formGroup]="createContainerForm">
+        <div fxLayout="row" class="input" fxLayoutAlign="center">
+      <mat-form-field appearance="fill">
+        <mat-label>Vælg type</mat-label>
+        <select matNativeControl formControlName="shipmentSize" required>
+          <option label="Vælg størrelse"></option>
+          <option value="20fods">20 fods</option>
+          <option value="40fods">40 fods</option>
+        </select>
+        <mat-error *ngIf="shipmentSize.hasError('required')">Type skal vælges</mat-error>
+      </mat-form-field>
+       </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <mat-form-field appearance="standard">
+            <mat-label>Antal</mat-label>
+            <input matInput placeholder="Antal" formControlName="quantity" required>
+          </mat-form-field>
+        </div>
+        <mat-card-header fxLayoutAlign="center">
+          <mat-card-title>Leverings oplysninger</mat-card-title>
+        </mat-card-header>
+          <div fxLayout="row" fxLayoutAlign="center">
+            <h3 class="shipment-info">Afhentnings adresse</h3>
+            <h3>Leverings adresse</h3>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field appearance="standard" class="shipment-info">
+              <mat-label>Adresse</mat-label>
+              <input matInput placeholder="Adresse" formControlName="pickUpAddress" required>
+              <mat-label *ngIf="pickUpAddress.touched && pickUpAddress.invalid"> skal udfyldes</mat-label>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Adresse</mat-label>
+              <input matInput placeholder="Adresse" formControlName="deliveryAddress" required>
+              <mat-label *ngIf="deliveryAddress.touched && deliveryAddress.invalid"> skal udfyldes</mat-label>
+            </mat-form-field>
+          </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Adresse 2</mat-label>
+            <input matInput placeholder="Etage, dør osv." formControlName="pickUpAddress2">
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Adresse 2</mat-label>
+            <input matInput placeholder="Etage, dør osv." formControlName="deliveryAddress2">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>By</mat-label>
+            <input matInput placeholder="By" formControlName="pickUpCity" required>
+            <mat-label *ngIf="pickUpCity.touched && pickUpCity.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>By</mat-label>
+            <input matInput placeholder="By" formControlName="deliveryCity" required>
+            <mat-label *ngIf="deliveryCity.touched && deliveryCity.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Land</mat-label>
+            <input matInput placeholder="Land" formControlName="pickUpCountry" required>
+            <mat-label *ngIf="pickUpCountry.touched && pickUpCountry.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Land</mat-label>
+            <input matInput placeholder="Land" formControlName="deliveryCountry" required>
+            <mat-label *ngIf="deliveryCountry.touched && deliveryCountry.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Post nummer</mat-label>
+            <input matInput placeholder="Post nummer" formControlName="pickUpZipCode" required>
+            <mat-label *ngIf="pickUpZipCode.touched && pickUpZipCode.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Post nummer</mat-label>
+            <input matInput placeholder="Post nummer" formControlName="deliveryZipCode" required>
+            <mat-label *ngIf="deliveryZipCode.touched && deliveryZipCode.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Afhentnings dato</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="pickUpTime" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-label *ngIf="pickUpTime.touched && pickUpTime.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Leverings dato</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="deliveryTime" required>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <mat-label *ngIf="pickUpTime.touched && pickUpTime.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+        </div>
+        <mat-card-header fxLayoutAlign="center">
+          <mat-card-title>Pakkeliste</mat-card-title>
+        </mat-card-header>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <h3 class="shipment-info">Genstand</h3>
+          <h3>Antal</h3>
+        </div>
+        <div formArrayName="packageLists">
+          <div *ngFor="let item of packageList.controls; let i=index" [formGroupName]="i" fxLayout="row">
+            <mat-form-field appearance="standard" class="shipment-info">
+              <mat-label>Genstand</mat-label>
+              <input matInput placeholder="F.eks. Stole" formControlName="item">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Antal</mat-label>
+              <input matInput placeholder="F.eks. 6" formControlName="quantity">
+            </mat-form-field>
+            <mat-card-actions style="margin-left: 20px">
+              <button id="deletePackage" mat-raised-button color="primary" (click)="deletePackageItem(i)">Slet</button>
+            </mat-card-actions>
+          </div>
+          <mat-card-actions>
+            <button id="addPackage" mat-raised-button color="primary" (click)="addPackageItem()">Ny linje</button>
+          </mat-card-actions>
+        </div>
+        <mat-card-actions fxLayoutAlign="center">
+          <button id="createShipment" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="checkValidate()">Opret forsendelse</button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

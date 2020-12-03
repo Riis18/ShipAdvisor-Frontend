@@ -13,6 +13,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './material-module';
 import { NavBarComponent } from './nav-bar/nav-bar/nav-bar.component';
 import { DashboardCustomerComponent } from './dashboard/dashboard-customer/dashboard-customer.component';
+import { CustomerShipmentComponent } from './customers/customer-shipment/customer-shipment.component';
+import { CustomerShipmenttypeComponent } from './customers/customer-shipmenttype/customer-shipmenttype.component';
+import { ContainerShipmentComponent } from './customers/create-shipments/container-shipment/container-shipment.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { DashboardCustomerComponent } from './dashboard/dashboard-customer/dashb
     RegisterComponent,
     SignInComponent,
     NavBarComponent,
-    DashboardCustomerComponent
+    DashboardCustomerComponent,
+    CustomerShipmentComponent,
+    CustomerShipmenttypeComponent,
+    ContainerShipmentComponent
   ],
   imports: [
     BrowserModule,

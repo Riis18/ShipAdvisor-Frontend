@@ -1,0 +1,41 @@
+<div fxLayout="row" fxLayoutAlign="left">
+  <h2>Aktive Forsendelser</h2>
+</div>
+<div fxLayout="row" fxLayoutAlign="center">
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.biddingStatus}} </td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="shipmentType">
+      <mat-header-cell *matHeaderCellDef> Forsendelse type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.shipmentType + ' ' + element.shipmentSize}} </mat-cell>
+    </ng-container>
+
+    <!-- Created Column -->
+    <ng-container matColumnDef="created">
+      <mat-header-cell *matHeaderCellDef> Oprettet </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.orderCreated}} </mat-cell>
+    </ng-container>
+
+    <!-- Pick up Column -->
+    <ng-container matColumnDef="pickUpDate">
+      <mat-header-cell *matHeaderCellDef> Afhentning </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.pickUpTime}} </mat-cell>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="deliveryDate">
+      <mat-header-cell *matHeaderCellDef> Ankomst </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.deliveryTime}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </table>
+</div>
+

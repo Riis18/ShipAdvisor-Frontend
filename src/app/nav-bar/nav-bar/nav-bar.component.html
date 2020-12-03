@@ -11,17 +11,18 @@
         alt="ShipAdvisorLogo"
         routerLink="/">
     </mat-list-item>
-    <mat-nav-list>
+    <mat-nav-list *ngIf="customer.role === 'Customer'">
       <hr>
       <a mat-list-item routerLink="/dashboard" class="navBtn">Dashboard</a>
-      <a mat-list-item routerLink="/customer" class="navBtn">tester</a>
+      <a mat-list-item routerLink="/shipments" class="navBtn">Mine forsendelser</a>
+      <a mat-list-item routerLink="/shipmenttype" class="navBtn">Ny forsendelse</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
       <span class="spacer"></span>
-      <a class="welcome" *ngIf="customer.role === 'Customer' ">Welcome {{customer.firstName}}</a>
-      <a class="welcome" *ngIf="customer.role === 'CompanyCustomer' ">Welcome {{customer.companyName}}</a>
+      <a class="welcome" *ngIf="customer.role === 'Customer' ">Velkommen {{customer.firstName}}</a>
+      <a class="welcome" *ngIf="customer.role === 'CompanyCustomer' ">Velkommen {{customer.companyName}}</a>
       <a mat-list-item class="navBtn" (click)="signOut()" >Log ud</a>
     </mat-toolbar>
     <router-outlet></router-outlet>
