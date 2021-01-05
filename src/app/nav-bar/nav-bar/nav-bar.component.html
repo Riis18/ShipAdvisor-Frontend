@@ -14,8 +14,13 @@
     <mat-nav-list *ngIf="customer.role === 'Customer'">
       <hr>
       <a mat-list-item routerLink="/dashboard" class="navBtn">Dashboard</a>
-      <a mat-list-item routerLink="/shipments" class="navBtn">Mine forsendelser</a>
-      <a mat-list-item routerLink="/shipmenttype" class="navBtn">Ny forsendelse</a>
+      <a mat-list-item routerLink="/shipments" class="navBtn">Mine forespørgsler</a>
+      <a mat-list-item routerLink="/shipmenttype" class="navBtn">Ny forespørgelse</a>
+    </mat-nav-list>
+    <mat-nav-list *ngIf="customer.role === 'CompanyCustomer'">
+      <hr>
+      <a mat-list-item routerLink="/dashboard" class="navBtn">Dashboard</a>
+      <a mat-list-item routerLink="/queries" class="navBtn">Nye forespørgsler</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

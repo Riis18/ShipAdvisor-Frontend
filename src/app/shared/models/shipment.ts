@@ -1,12 +1,15 @@
 import {Customer} from './customer';
 import {PackageList} from './packageList';
+import {Bid} from './Bid';
 
 export class Shipment {
   id: number;
   biddingStatus: string;
   orderStatus: string;
   orderCreated: string;
-  customers: Customer[];
+  customer: Customer;
+  company: Customer;
+  bids: Bid[];
   packageLists: PackageList[];
   shipmentType: string;
   shipmentSize: string;

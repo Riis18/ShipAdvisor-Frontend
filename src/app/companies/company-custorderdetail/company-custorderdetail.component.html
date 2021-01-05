@@ -1,0 +1,147 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="mat-card">
+    <mat-card-title fxLayoutAlign="center center">
+      <mat-card-title>Forespørgsel</mat-card-title>
+    </mat-card-title>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-header fxLayout="column" class="header-layout">
+        Forsendelse type:
+        <br>
+        Antal:
+      </mat-card-header>
+      <mat-card-header fxLayout="column" class="mat-card-header2">
+        {{this.order.shipmentType}} {{this.order.shipmentSize}}
+        <br>
+        {{this.order.quantity}}
+      </mat-card-header>
+    </div>
+    <br>
+    <mat-card-header fxLayoutAlign="start">
+      <mat-card-title>Leverings oplysninger</mat-card-title>
+    </mat-card-header>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-header class="mat-card-header2" fxLayout="column">
+        <h3 class="header-layout">Afhentnings adresse</h3>
+        <br>
+        {{this.order.pickUpAddress}}
+        <br>
+        {{this.order.pickUpAddress2}}
+        <br>
+        {{this.order.pickUpCity}}
+        <br>
+        {{this.order.pickUpCountry}}
+        <br>
+        {{this.order.pickUpZipCode}}
+        <h3 class="header-layout">Klar til afhentning</h3>
+        {{this.order.pickUpTime}}
+      </mat-card-header>
+      <mat-card-header class="mat-card-header2" fxLayout="column">
+        <h3 class="header-layout">Leverings adresse</h3>
+        <br>
+        {{this.order.deliveryAddress}}
+        <br>
+        {{this.order.deliveryAddress2}}
+        <br>
+        {{this.order.deliveryCity}}
+        <br>
+        {{this.order.deliveryCountry}}
+        <br>
+        {{this.order.deliveryZipCode}}
+        <br>
+        <h3 class="header-layout">Ønsket levering</h3>
+        {{this.order.deliveryTime}}
+      </mat-card-header>
+    </div>
+    <br>
+    <div fxLayout="column">
+      <mat-card-header fxLayoutAlign="start">
+        <mat-card-title>Pakkeliste</mat-card-title>
+      </mat-card-header>
+      <div fxLayout="row" fxLayoutAlign="start">
+        <h3 class="header-layout">Genstand</h3>
+        <h3 class="header-layout">Antal</h3>
+      </div>
+      <div fxLayoutAlign="start" fxLayout="row" *ngFor="let package of order.packageLists">
+        <mat-card-header class="mat-card-header2">
+          {{package.item}}
+        </mat-card-header>
+        <mat-card-header class="mat-card-header2" fxLayoutAlign="end">
+          {{package.quantity}}
+        </mat-card-header>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Byd på forespørgelse</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayoutAlign="column" fxLayoutAlign="center center">
+      <form [formGroup]="createBidForm">
+        <div fxLayout="row" fxLayoutAlign="center">
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Afhentnings dato</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="pickUpDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-label *ngIf="pickUpDate.touched && pickUpDate.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Leverings dato</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="deliveryDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <mat-label *ngIf="deliveryDate.touched && deliveryDate.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start">
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Transport Metode</mat-label>
+            <input matInput placeholder="Transport Metode" formControlName="transportMethod" required>
+            <mat-label *ngIf="transportMethod.touched && transportMethod.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+        </div>
+        <mat-card-header fxLayoutAlign="start">
+          <mat-card-title>Nødvendige oplysninger/dokumentation</mat-card-title>
+        </mat-card-header>
+        <div formArrayName="bidInfo">
+          <div *ngFor="let item of bidInfo.controls; let i=index" [formGroupName]="i" fxLayout="row">
+            <mat-form-field appearance="standard" class="shipment-info">
+              <mat-label>Information</mat-label>
+              <input matInput placeholder="F.eks. fulde navn på modtager" formControlName="companyInfo">
+            </mat-form-field>
+            <mat-card-actions style="margin-left: 20px">
+              <button id="deleteInfo" mat-raised-button color="primary" (click)="deleteInfo(i)">Slet</button>
+            </mat-card-actions>
+          </div>
+          <mat-card-actions>
+            <button id="addInfo" mat-raised-button color="primary" (click)="addInfo()">Ny linje</button>
+          </mat-card-actions>
+        </div>
+        <mat-card-header fxLayoutAlign="start">
+          <mat-card-title>Pris oversigt</mat-card-title>
+        </mat-card-header>
+        <div fxLayout="column" fxLayoutAlign="start">
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Transport pris</mat-label>
+            <input matInput placeholder="f.eks. 1337" formControlName="transportPrice" required>
+            <mat-label *ngIf="transportPrice.touched && transportPrice.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Fortoldning</mat-label>
+            <input matInput placeholder="f.eks. 420" formControlName="customPrice" required>
+            <mat-label *ngIf="customPrice.touched && customPrice.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="shipment-info">
+            <mat-label>Total pris</mat-label>
+            <input matInput placeholder="Totale pris" formControlName="totalPrice" required>
+            <mat-label *ngIf="transportPrice.touched && transportPrice.invalid"> skal udfyldes</mat-label>
+          </mat-form-field>
+        </div>
+        <mat-card-actions fxLayoutAlign="center">
+          <button id="createShipment" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="checkValidate()">Byd på forespørgsel</button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -88,8 +88,8 @@ export class ContainerShipmentComponent implements OnInit {
     date = this.deliveryTime.value;
     order.deliveryTime = date.toJSON();
     customer = this.userService.getCurrentUser();
-    order.customers = [];
-    order.customers.push(customer);
+    order.customer = customer;
+    order.shipmentType = 'Container';
     console.log(order);
     this.customerService.createOrder(order).subscribe();
     this.createContainerForm.reset();

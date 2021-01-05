@@ -16,6 +16,8 @@ import { DashboardCustomerComponent } from './dashboard/dashboard-customer/dashb
 import { CustomerShipmentComponent } from './customers/customer-shipment/customer-shipment.component';
 import { CustomerShipmenttypeComponent } from './customers/customer-shipmenttype/customer-shipmenttype.component';
 import { ContainerShipmentComponent } from './customers/create-shipments/container-shipment/container-shipment.component';
+import { CompanyCustorderlistComponent } from './companies/company-custorderlist/company-custorderlist.component';
+import { CompanyCustorderdetailComponent } from './companies/company-custorderdetail/company-custorderdetail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ContainerShipmentComponent } from './customers/create-shipments/contain
     DashboardCustomerComponent,
     CustomerShipmentComponent,
     CustomerShipmenttypeComponent,
-    ContainerShipmentComponent
+    ContainerShipmentComponent,
+    CompanyCustorderlistComponent,
+    CompanyCustorderdetailComponent
   ],
   imports: [
     BrowserModule,
