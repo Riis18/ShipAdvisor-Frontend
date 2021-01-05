@@ -1,0 +1,132 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-card class="mat-card">
+    <mat-card-title fxLayoutAlign="center center">
+      <mat-card-title>Forespørgsel</mat-card-title>
+    </mat-card-title>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-header fxLayout="column" class="header-layout">
+        Forsendelse type:
+        <br>
+        Antal:
+      </mat-card-header>
+      <mat-card-header fxLayout="column" class="mat-card-header2">
+        {{this.order.shipmentType}} {{this.order.shipmentSize}}
+        <br>
+        {{this.order.quantity}}
+      </mat-card-header>
+    </div>
+    <br>
+    <mat-card-header fxLayoutAlign="start">
+      <mat-card-title>Leverings oplysninger</mat-card-title>
+    </mat-card-header>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-header class="mat-card-header2" fxLayout="column">
+        <h3 class="header-layout">Afhentnings adresse</h3>
+        <br>
+        {{this.order.pickUpAddress}}
+        <br>
+        {{this.order.pickUpAddress2}}
+        <br>
+        {{this.order.pickUpCity}}
+        <br>
+        {{this.order.pickUpCountry}}
+        <br>
+        {{this.order.pickUpZipCode}}
+        <h3 class="header-layout">Klar til afhentning</h3>
+        {{this.order.pickUpTime}}
+      </mat-card-header>
+      <mat-card-header class="mat-card-header2" fxLayout="column">
+        <h3 class="header-layout">Leverings adresse</h3>
+        <br>
+        {{this.order.deliveryAddress}}
+        <br>
+        {{this.order.deliveryAddress2}}
+        <br>
+        {{this.order.deliveryCity}}
+        <br>
+        {{this.order.deliveryCountry}}
+        <br>
+        {{this.order.deliveryZipCode}}
+        <br>
+        <h3 class="header-layout">Ønsket levering</h3>
+        {{this.order.deliveryTime}}
+      </mat-card-header>
+    </div>
+    <br>
+    <div fxLayout="column">
+      <mat-card-header fxLayoutAlign="start">
+        <mat-card-title>Pakkeliste</mat-card-title>
+      </mat-card-header>
+      <div fxLayout="row" fxLayoutAlign="start">
+        <h3 class="header-layout">Genstand</h3>
+        <h3 class="header-layout">Antal</h3>
+      </div>
+      <div fxLayoutAlign="start" fxLayout="row" *ngFor="let package of order.packageLists">
+        <mat-card-header class="mat-card-header2">
+          {{package.item}}
+        </mat-card-header>
+        <mat-card-header class="mat-card-header2" fxLayoutAlign="end">
+          {{package.quantity}}
+        </mat-card-header>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="queries-mat-card" *ngFor="let bid of bids" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card-title fxLayoutAlign="center center">
+      <mat-card-title>Bud</mat-card-title>
+    </mat-card-title>
+    <div fxLayout="column" class="bid-card">
+      <mat-card-header class="header-layout">
+        Transport metode:
+      </mat-card-header>
+      <mat-card-header class="mat-card-header2">
+        {{bid.transportMethod}}
+      </mat-card-header>
+    </div>
+    <div fxLayout="column">
+      <mat-card-header class="header-layout">
+        Afhentning:
+      </mat-card-header>
+      <mat-card-header class="mat-card-header2">
+        {{bid.pickUpDate}}
+      </mat-card-header>
+    </div>
+    <div fxLayout="column">
+      <mat-card-header class="header-layout">
+        Levering:
+      </mat-card-header>
+      <mat-card-header class="mat-card-header2">
+        {{bid.deliveryDate}}
+      </mat-card-header>
+    </div>
+    <div fxLayout="column">
+      <mat-card-header class="header-layout">
+        Transport Pris:
+      </mat-card-header>
+      <mat-card-header class="mat-card-header2">
+        {{bid.transportPrice}}
+      </mat-card-header>
+    </div>
+    <div fxLayout="column">
+      <mat-card-header class="header-layout">
+        Told:
+      </mat-card-header>
+      <mat-card-header class="mat-card-header2">
+        {{bid.customPrice}}
+      </mat-card-header>
+    </div>
+    <div fxLayout="column">
+      <mat-card-header class="header-layout">
+        Total pris:
+      </mat-card-header>
+      <mat-card-header class="mat-card-header2">
+        {{bid.totalPrice}}
+      </mat-card-header>
+    </div>
+    <div>
+      <mat-card-actions fxLayoutAlign="center">
+        <button id="registerButton" mat-raised-button color="primary" (click)="onAccept(bid)">Accepter</button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</div>

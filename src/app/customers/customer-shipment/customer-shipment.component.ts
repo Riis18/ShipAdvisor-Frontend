@@ -5,6 +5,7 @@ import {Customer} from '../../shared/models/customer';
 import {UserService} from '../../shared/services/user.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {formatDate} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-customer-shipment',
@@ -17,12 +18,10 @@ export class CustomerShipmentComponent implements OnInit {
   shipment: Shipment[];
   customer: Customer;
 
-  dataSource;
-
-
 
   constructor(private userService: UserService,
-              private customerService: CustomerService) {
+              private customerService: CustomerService,
+              private router: Router) {
     this.customer = this.userService.getCurrentUser();
 
   }
@@ -35,8 +34,11 @@ export class CustomerShipmentComponent implements OnInit {
         s.deliveryTime = formatDate(s.deliveryTime, 'dd/MM/yyyy', 'en-US');
       });
       this.shipment = shipments;
-      this.dataSource = new MatTableDataSource(this.shipment);
     });
+  }
+
+  onClick(id) {
+    this.router.navigateByUrl('/shipment/' + id);
   }
 
 }

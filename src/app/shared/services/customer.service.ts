@@ -6,6 +6,9 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import {Shipment} from '../models/shipment';
+import {Bid} from '../models/Bid';
+import {ShipmentDto} from '../models/Dto/shipmentDto';
+import {executeBrowserBuilder} from '@angular-devkit/build-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +36,18 @@ export class CustomerService {
 
   createOrder(shipment: Shipment): Observable<Shipment> {
     return this.http.post<Shipment>(environment.apiUrl + 'shipment/createShipment', shipment);
+  }
+
+  getOrderById(id: number): Observable<Shipment> {
+    return this.http.get<Shipment>(environment.apiUrl + 'shipment/order/' + id);
+  }
+
+  getBidsByOrderId(id: number): Observable<Bid[]> {
+    return this.http.get<Bid[]>(environment.apiUrl + 'customer/bid/' + id);
+  }
+
+  updateCustomerOrder(shipmentDto: ShipmentDto): Observable<ShipmentDto> {
+    return this.http.put<ShipmentDto>(environment.apiUrl + 'customer/updateShipment', shipmentDto);
   }
 
 }

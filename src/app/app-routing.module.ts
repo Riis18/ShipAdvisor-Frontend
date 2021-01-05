@@ -10,6 +10,7 @@ import {CompanyCustorderlistComponent} from './companies/company-custorderlist/c
 import {CustomerShipmentComponent} from './customers/customer-shipment/customer-shipment.component';
 import {CustomerShipmenttypeComponent} from './customers/customer-shipmenttype/customer-shipmenttype.component';
 import {CompanyCustorderdetailComponent} from './companies/company-custorderdetail/company-custorderdetail.component';
+import {CustomerShipmentdetailsComponent} from './customers/customer-shipmentdetails/customer-shipmentdetails.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'createContainer', component: ContainerShipmentComponent, canActivate: [AuthloggedInGuard] },
   { path: 'queries', component: CompanyCustorderlistComponent, canActivate: [AuthloggedInGuard] },
   { path: 'queries/:id', component: CompanyCustorderdetailComponent, canActivate: [AuthloggedInGuard] },
+  { path: 'shipment/:id', component: CustomerShipmentdetailsComponent, canActivate: [AuthloggedInGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: SignInComponent },
 ];
