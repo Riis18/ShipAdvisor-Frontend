@@ -90,7 +90,6 @@ export class ContainerShipmentComponent implements OnInit {
     customer = this.userService.getCurrentUser();
     order.customer = customer;
     order.shipmentType = 'Container';
-    console.log(order);
     this.customerService.createOrder(order).subscribe();
     this.createContainerForm.reset();
   }

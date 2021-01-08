@@ -3,7 +3,6 @@ import {Shipment} from '../../shared/models/shipment';
 import {CustomerService} from '../../shared/services/customer.service';
 import {Customer} from '../../shared/models/customer';
 import {UserService} from '../../shared/services/user.service';
-import {MatTableDataSource} from '@angular/material/table';
 import {formatDate} from '@angular/common';
 import {Router} from '@angular/router';
 
