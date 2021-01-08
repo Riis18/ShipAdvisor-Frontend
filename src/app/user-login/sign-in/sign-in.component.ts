@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {UserService} from '../../shared/services/user.service';
-import {Router} from '@angular/router';
-import firebase from 'firebase';
-import {CustomerService} from '../../shared/services/customer.service';
 
 @Component({
   selector: 'app-sign-in',

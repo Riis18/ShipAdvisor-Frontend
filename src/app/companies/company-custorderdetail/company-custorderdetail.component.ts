@@ -1,10 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CompanyService} from '../../shared/services/company.service';
 import {Shipment} from '../../shared/models/shipment';
 import {ActivatedRoute } from '@angular/router';
-import {Subscription} from 'rxjs';
 import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
-import {Customer} from '../../shared/models/customer';
 import {Bid} from '../../shared/models/Bid';
 import {UserService} from '../../shared/services/user.service';
 

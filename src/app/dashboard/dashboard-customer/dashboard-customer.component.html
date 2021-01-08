@@ -1,1 +1,19 @@
-<p>dashboard-customer works!</p>
+<mat-card fxLayoutAlign="center center" fxLayout="column" *ngIf="customer.role === 'Customer'">
+  <mat-card-header class="mat-card-header" fxLayoutAlign="center">
+    Velkommen til ShipAdvisor
+  </mat-card-header>
+  <mat-card-actions>
+    <button id="forespørgselButton" mat-raised-button color="primary" routerLink="/shipmenttype" >Lav ny forespørgsel</button>
+  </mat-card-actions>
+  <mat-card-actions>
+    <button id="mineForespørgsler" mat-raised-button color="primary" routerLink="/shipments" >Se mine forespørgsler</button>
+  </mat-card-actions>
+</mat-card>
+<mat-card fxLayoutAlign="center center" fxLayout="column" *ngIf="customer.role === 'CompanyCustomer'">
+  <mat-card-header class="mat-card-header" fxLayoutAlign="center">
+    Velkommen til ShipAdvisor
+  </mat-card-header>
+  <mat-card-actions>
+    <button id="queriesButton" mat-raised-button color="primary" routerLink="/queries" >Se nye forespørgsler</button>
+  </mat-card-actions>
+</mat-card>

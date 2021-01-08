@@ -10,6 +10,7 @@ export class Shipment {
   customer: Customer;
   company: Customer;
   bids: Bid[];
+  bidCount: number;
   packageLists: PackageList[];
   shipmentType: string;
   shipmentSize: string;
