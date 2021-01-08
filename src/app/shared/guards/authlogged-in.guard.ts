@@ -9,7 +9,6 @@ import firebase from 'firebase';
 })
 export class AuthloggedInGuard implements CanActivate {
 
-  public userLoggedIn: boolean;
   constructor(private authService: AuthService,
               private router: Router) {
   }

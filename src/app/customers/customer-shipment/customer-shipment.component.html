@@ -1,0 +1,32 @@
+<div fxLayout="row" fxLayoutAlign="left">
+  <h2>Aktive Forespørgsler</h2>
+</div>
+<div fxLayout="column" fxLayoutAlign="center">
+  <mat-card class="queries-mat-card" *ngFor="let order of shipment" fxLayout="row" fxLayoutAlign="center center" (click)="onClick(order.id)">
+    <mat-card-header class="header-layout">
+      Ordre nr:
+    </mat-card-header>
+    {{order.id}}
+    <mat-card-header class="header-layout">
+      Forsendelse type:
+    </mat-card-header>
+     {{order.shipmentType}} {{order.shipmentSize}}
+    <mat-card-header class="header-layout">
+      Bud:
+    </mat-card-header>
+    {{order.bidCount}}
+    <mat-card-header class="header-layout">
+      Oprettet:
+    </mat-card-header>
+    {{order.orderCreated}}
+    <mat-card-header class="header-layout">
+      Afhentning:
+    </mat-card-header>
+    {{order.pickUpTime}}
+    <mat-card-header class="header-layout">
+      Levering:
+    </mat-card-header>
+    {{order.deliveryTime}}
+  </mat-card>
+</div>
+

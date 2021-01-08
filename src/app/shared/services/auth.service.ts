@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {CustomerService} from './customer.service';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -14,6 +13,9 @@ export class AuthService {
 
   private userLoggedIn = new BehaviorSubject(false);
 
+  /**
+   * Checks to see if the user is logged in
+   */
   async isLoggedIn(): Promise<boolean> {
     await firebase.auth().onAuthStateChanged(user => {
       if (user && this.userService.getCurrentUser()){
@@ -25,6 +27,9 @@ export class AuthService {
     return this.userLoggedIn.getValue();
   }
 
+  /**
+   * gets the user that is logged in
+   */
   getLoggedIn(): Observable<boolean> {
     return this.userLoggedIn.asObservable();
   }
